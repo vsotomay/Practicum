@@ -1,0 +1,32 @@
+
+<div class="container">
+    <div class="footer">
+        <p>&copy; Team #1</p>
+    </div>
+</div>
+<!-- Optional JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+<!-- My JS -->
+<script src="https://use.fontawesome.com/a17b672b5b.js"></script>
+<script src="../static/js/handler.js"></script>
+
+<script type="text/javascript">
+    $('a[href^="#"]').click(function(){
+
+        var the_id = $(this).attr("href");
+
+        $('html, body').animate({
+            scrollTop:$(the_id).offset().top
+        }, 'slow');
+
+        return false;});
+</script>
+
+</body>
+</html>

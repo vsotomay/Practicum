@@ -1,0 +1,139 @@
+{% include "navbar.html" %}
+
+
+<div class="container">
+
+    <div class="cover-container">
+        <div class="header">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <span id="directions">
+                    <h2 class="text-uppercase">How to play:</h2>
+                        <hr half>
+                    <ol>
+                        <li>Select a workshop you'd like to participate in.</li>
+                        <li>If &nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;, then workshop can be completed alone.</li>
+                        <li>If &nbsp;<i class="fa fa-users" aria-hidden="true"></i>&nbsp;, then workshop can be completed in teams.</li>
+                        <li>If you decide to work in a team, each member must select
+                            the other members' username from the list.</li>
+                        <li>Good luck!</li>
+                        <br>
+                    </ol>
+                    </span>
+
+                    <div class="text-center">
+                        <a href="#workshop-1" id="chevron-btn" class="js-scroll-trigger">
+                            <i class="fa fa-chevron-circle-down fa-lg" aria-hidden="true"></i>
+                        </a>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="workshop-1" class="jumbotron primary-jum">
+        <h2 class="jum-title1">Route Hijacking <i class="fa fa-users fa-lg" id="jum-title-icon" aria-hidden="true"></i></h2>
+
+        <p>
+            A description of what this lab is about and why you should participate.
+            Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+            <br><br><br>
+        </p>
+
+        <div class="text-center">
+            <button type="button" class="center btn btn-primary btn-lg" data-toggle="modal" data-target="#rh-modal">
+                Begin Workshop
+            </button>
+        </div>
+
+    </div>
+
+    <div class="jumbotron secondary-jum">
+        <h2 class="jum-title2">Buffer Overflow <i class="fa fa-user fa-lg" id="jum-title-icon" aria-hidden="true"></i></h2>
+        <p>
+            A description of what this lab is about and why you should participate.
+            Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+        </p>
+    </div>
+
+    <div class="jumbotron secondary-jum">
+        <h2 class="jum-title1">Man in the Middle <i class="fa fa-user fa-lg" id="jum-title-icon" aria-hidden="true"></i></h2>
+        <p>
+            A description of what this lab is about and why you should participate.
+            Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+        </p>
+    </div>
+
+    <div class="jumbotron secondary-jum">
+        <h2 class="jum-title2">SSL Strip <i class="fa fa-users fa-lg" id="jum-title-icon" aria-hidden="true"></i></h2>
+        <p>
+            A description of what this lab is about and why you should participate.
+            Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+        </p>
+    </div>
+
+    <div class="jumbotron secondary-jum">
+        <h2 class="jum-title1">HFS <i class="fa fa-users fa-lg" id="jum-title-icon" aria-hidden="true"></i></h2>
+        <p>
+            A description of what this lab is about and why you should participate.
+            Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+        </p>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="rh-modal" tabindex="-1" role="dialog" aria-labelledby="rh-modalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="rh-modalLabel">
+                        Get Workshop Username
+                    </h4>
+                </div>
+
+                <!-- Modal Body -->
+                <div class="modal-body">
+
+                    <h3 id="modal-title">Please enter a username to participate in workshop teams: </h3>
+
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <label  class="col-sm-2 control-label" for="username">Username</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" id="username" placeholder="Enter username"/>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">
+                                    Close
+                                </button>
+                                <button class="btn btn-primary">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- /container -->
+
+{% include "footer.html" %}
