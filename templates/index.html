@@ -12,10 +12,16 @@
                         <hr half>
                     <ol>
                         <li>Select a workshop you'd like to participate in.</li>
-                        <li>If &nbsp;<i class="fa fa-user" aria-hidden="true"></i>&nbsp;, then workshop can be completed alone.</li>
-                        <li>If &nbsp;<i class="fa fa-users" aria-hidden="true"></i>&nbsp;, then workshop can be completed in teams.</li>
-                        <li>If you decide to work in a team, each member must select
-                            the other members' username from the list.</li>
+                        <li>If &nbsp;<i class="fa fa-user ws-icon" aria-hidden="true"></i>&nbsp;, then workshop can be completed alone.</li>
+                        <li>If &nbsp;<i class="fa fa-users ws-icon" aria-hidden="true"></i>&nbsp;, then workshop can be completed in teams.</li>
+                        <li>If you decide to work in a team:
+                            <ul>
+                                <li>The team leader must create a room.</li>
+                                <li>Then, the team leader must share room key with friends.</li>
+                                <li>Friends must enter username and shared room key to enter room.</li>
+                                <li>Team leader will begin session when all team members are in room.</li>
+                            </ul>
+                        </li>
                         <li>Good luck!</li>
                         <br>
                     </ol>
@@ -43,12 +49,41 @@
         </p>
 
         <div class="text-center">
-            <button type="button" class="center btn btn-primary btn-lg" data-toggle="modal" data-target="#rh-modal">
+            <!--<button type="button" class="center btn btn-primary btn-lg" data-toggle="modal" data-target="#rh-modal">-->
+            <button type="button" class="center btn btn-primary btn-lg" onclick="showHide('rh-ws-div')">
                 Begin Workshop
             </button>
         </div>
 
+        <br><br>
+
+        <div id="rh-ws-div" style="display: none;">
+
+            <div class="row">
+                <div class="col-sm-6 room-container">
+                    <a href="#" data-toggle="modal" data-target="#rh-modal">
+                    <!--<a href="/team">-->
+                        <div class="room-div">
+                            <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+
+                            {{ teamlist }}
+
+                        </div>
+                    </a>
+                </div>
+                <div class="col-sm-6">
+                    <a href="#">
+                        <div class="room-div">
+                            <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
+
 
     <div class="jumbotron secondary-jum">
         <h2 class="jum-title2">Buffer Overflow <i class="fa fa-user fa-lg" id="jum-title-icon" aria-hidden="true"></i></h2>
@@ -56,7 +91,24 @@
             A description of what this lab is about and why you should participate.
             Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.
             Maecenas sed diam eget risus varius blandit sit amet non magna.
+            <br><br><br>
         </p>
+
+        <div class="text-center">
+            <!--<button type="button" class="center btn btn-primary btn-lg" data-toggle="modal" data-target="#rh-modal">-->
+            <button type="button" class="center btn btn-primary btn-lg" onclick="showHide('bo-ws-div')">
+                Begin Workshop
+            </button>
+        </div>
+
+        <br><br>
+
+        <div id="bo-ws-div" style="display: none; text-align: center;">
+            <h3>Please enter the following IP to your Remote Desktop Application:
+                <br><br><span class="ip-addr">129.108.18.142:5000</span></h3>
+
+        </div>
+
     </div>
 
     <div class="jumbotron secondary-jum">
@@ -87,53 +139,56 @@
     </div>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="rh-modal" tabindex="-1" role="dialog" aria-labelledby="rh-modalLabel">
+    <!-- MODAL -->
+    <div class="modal fade" id="rh-modal">
         <div class="modal-dialog">
             <div class="modal-content">
-
-                <!-- Modal Header -->
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
                     </button>
-                    <h4 class="modal-title" id="rh-modalLabel">
-                        Get Workshop Username
-                    </h4>
+                    <h4 class="modal-title">Team Room</h4>
                 </div>
 
-                <!-- Modal Body -->
-                <div class="modal-body">
 
-                    <h3 id="modal-title">Please enter a username to participate in workshop teams: </h3>
+                <form action="/team" method="POST">
+                    <div class="modal-body">
 
-                    <form class="form-horizontal">
-
-                        <div class="form-group">
-                            <label  class="col-sm-2 control-label" for="username">Username</label>
-                            <div class="col-sm-10">
-                                <input class="form-control" id="username" placeholder="Enter username"/>
+                        <h3 class="modal-title">
+                            <br>
+                            You are team leader.
+                            <br>Please enter a <i>username</i> and a <i>room key</i> to share with your friends.
+                            <br><br>
+                        </h3>
+                        <div class="form-group row">
+                            <label for="username" class="col-4 col-form-label">Username: </label>
+                            <div class="col-8">
+                                <input class="form-control" id="username" name="username">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="roomkey" class="col-4 col-form-label">Room Key: </label>
+                            <div class="col-8">
+                                <input class="form-control" id="roomkey" name="roomkey">
                             </div>
                         </div>
 
 
-                        <div class="form-group">
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">
-                                    Close
-                                </button>
-                                <button class="btn btn-primary">
-                                    Submit
-                                </button>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btnSave" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
 
-                    </form>
-                </div>
+
             </div>
+            <!-- /.modal-content -->
         </div>
+        <!-- /.modal-dialog -->
     </div>
+
+    <!-- END MODAL -->
+
 </div> <!-- /container -->
 
 {% include "footer.html" %}
