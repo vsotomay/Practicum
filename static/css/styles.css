@@ -1,6 +1,6 @@
 .header {
-    margin-top: 10%;
-    margin-bottom: 20%;
+    margin-top: 0%;
+    margin-bottom: 15%;
 }
 
 .navbar-dark .navbar-brand {
@@ -32,8 +32,9 @@ h2 {
     margin-bottom: 1em;
 }
 
-#modal-title {
-    color: #eb6864;
+.modal-title {
+    color: #d33682;
+    text-align: center;
     margin-bottom: 2.5em;
 }
 
@@ -43,7 +44,11 @@ h2 {
 
 #directions > h2 {
     text-align: center;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.25em;
+}
+
+.ws-icon {
+    color: #d33682;
 }
 
 #chevron-btn {
@@ -52,7 +57,30 @@ h2 {
     margin-bottom: 1em;
 }
 
+.ip-addr {
+    color: #e74c3c;
+}
+
 .btn-primary {
     background-color: #3498db !important;
     border-color: #258cd1 !important;
 }
+
+.room-div {
+    background-color: #464545 !important;
+    color: whitesmoke;
+    font-size: 22px;
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.room-div > .fa {
+    display: inherit !important;
+    font-size: 3.25em;
+    text-align: center;
+    color: #3498db;
+    margin-bottom: 1em;
+}
+
