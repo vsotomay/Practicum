@@ -76,7 +76,7 @@ h2 {
     border-radius: 4px;
 }
 
-.room-div > .fa {
+.room-div > a > .fa {
     display: inherit !important;
     font-size: 3.25em;
     text-align: center;
