@@ -20,12 +20,4 @@ $( document ).ready(function() {
     });
 });
 
-$( document ).ready(function() {
-    $('#btnSave').click(function() {
-        var value = $('input').val();
-        //var un = document.getElementById('un');
 
-        $('h5').append('<br>' + value);
-        $('#myModal').modal('hide');
-    });
-});

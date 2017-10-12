@@ -1,5 +1,6 @@
 {% include "navbar.html" %}
 
+<script data-require="bootstrap@*" data-semver="3.1.1" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <div class="container">
 
@@ -59,26 +60,123 @@
 
         <div id="rh-ws-div" style="display: none;">
 
+            {%for i in range(0,rh_num)%}
+
             <div class="row">
-                <div class="col-sm-6 room-container">
-                    <a href="#" data-toggle="modal" data-target="#rh-modal">
-                    <!--<a href="/team">-->
-                        <div class="room-div">
-                            <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+                <div class="col-sm-6 col-sm-offset-3 room-container">
 
-                            {{ teamlist }}
+                    <div class="room-div">
 
-                        </div>
-                    </a>
-                </div>
-                <div class="col-sm-6">
-                    <a href="#">
-                        <div class="room-div">
+                        <h3 class="text-center">RH-{{i}}</h3>
+
+                        <a href="#" class="rh" data-toggle="modal" data-name="RH-{{i}}" data-wsu="wsu{{i}}" data-target="#room-modal">
                             <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
-                        </div>
-                    </a>
+                        </a>
+                        &nbsp;
+                        <a href="#" class="rh" data-toggle="modal" data-name="RH-{{i}}" data-target="#team-modal">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </a>
+                        <br><br>
+
+                        {{ teamlist }}
+
+                    </div>
+
                 </div>
             </div>
+
+            {% endfor %}
+
+
+
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6 room-container">-->
+
+
+                    <!--<div class="room-div">-->
+
+                        <!--<h3 class="text-center">RH-1</h3>-->
+
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-1" data-target="#room-modal">-->
+                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--&nbsp;-->
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-1" data-target="#team-modal">-->
+                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--<br><br>-->
+
+                        <!--{{ teamlist }}-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+                <!--<div class="col-sm-6 room-container">-->
+
+
+                    <!--<div class="room-div">-->
+
+                        <!--<h3 class="text-center">RH-2</h3>-->
+
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-2" data-target="#room-modal">-->
+                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--&nbsp;-->
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-2" data-target="#team-modal">-->
+                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--<br><br>-->
+
+                        <!--{{ teamlist }}-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+            <!--</div>-->
+
+            <!--<div class="row">-->
+                <!--<div class="col-sm-6 room-container">-->
+
+
+                    <!--<div class="room-div">-->
+
+                        <!--<h3 class="text-center">RH-3</h3>-->
+
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-3" data-target="#room-modal">-->
+                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--&nbsp;-->
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-3" data-target="#team-modal">-->
+                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--<br><br>-->
+
+                        <!--{{ teamlist }}-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+                <!--<div class="col-sm-6 room-container">-->
+
+
+                    <!--<div class="room-div">-->
+
+                        <!--<h3 class="text-center">RH-4</h3>-->
+
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-4" data-target="#room-modal">-->
+                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--&nbsp;-->
+                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-4" data-target="#team-modal">-->
+                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
+                        <!--</a>-->
+                        <!--<br><br>-->
+
+                        <!--{{ teamlist }}-->
+
+                    <!--</div>-->
+                <!--</div>-->
+            <!--</div>-->
 
         </div>
 
@@ -140,21 +238,19 @@
 
 
     <!-- MODAL -->
-    <div class="modal fade" id="rh-modal">
+    <div class="modal fade" id="room-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title">Team Room</h4>
+
                 </div>
 
 
-                <form action="/team" method="POST">
+                <form action="/room" method="POST">
                     <div class="modal-body">
 
                         <h3 class="modal-title">
-                            <br>
+
                             You are team leader.
                             <br>Please enter a <i>username</i> and a <i>room key</i> to share with your friends.
                             <br><br>
@@ -172,11 +268,20 @@
                             </div>
                         </div>
 
+                        <!-- Hidden Room Name field -->
+                        <div class="col-8 roomname">
+                            <input class="form-control" id="roomname" name="roomname" class="roomname">
+                        </div>
+
+                        <div class="col-8 wsu">
+                            <input class="form-control" id="wsu" name="wsu" class="wsu">
+                        </div>
+
 
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" id="btnSave" class="btn btn-primary">Save changes</button>
+                        <button type="submit" id="btn-save" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
 
@@ -186,8 +291,88 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-
     <!-- END MODAL -->
+
+
+
+
+    <!-- MODAL -->
+    <div class="modal fade" id="team-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                </div>
+
+
+                <form action="/team" method="POST">
+                    <div class="modal-body">
+
+                        <h3 class="modal-title">
+
+                            Please enter your own <i>username</i>, as well as <i>room key</i> shared by team leader.
+                            <br><br>
+                        </h3>
+                        <div class="form-group row">
+                            <label for="username" class="col-4 col-form-label">Username: </label>
+                            <div class="col-8">
+                                <input class="form-control" id="username" name="username">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="roomkey" class="col-4 col-form-label">Room Key: </label>
+                            <div class="col-8">
+                                <input class="form-control" id="roomkey" name="roomkey">
+                            </div>
+                        </div>
+
+                        <div class="col-8 roomname">
+                            <input class="form-control" id="roomname" name="roomname" class="roomname">
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" id="btn-save" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- END MODAL -->
+
+
+
+    <script type="text/javascript">
+        $('#team-modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var name = button.data('name')
+
+            var modal = $(this)
+            modal.find('.roomname input').val(name)
+
+        });
+
+        $('#room-modal').on('show.bs.modal', function(event) {
+            var button = $(event.relatedTarget)
+            var name = button.data('name')
+            var wsu = button.data('wsu')
+
+            var modal = $(this)
+            modal.find('.roomname input').val(name)
+            modal.find('.wsu input').val(wsu)
+
+        });
+    </script>
+
+
+
+
 
 </div> <!-- /container -->
 
