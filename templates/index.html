@@ -40,6 +40,7 @@
     </div>
 
     <div id="workshop-1" class="jumbotron primary-jum">
+        <h2>{{message}}</h2>
         <h2 class="jum-title1">Route Hijacking <i class="fa fa-users fa-lg" id="jum-title-icon" aria-hidden="true"></i></h2>
 
         <p>
@@ -78,7 +79,9 @@
                         </a>
                         <br><br>
 
-                        {{ teamlist }}
+                        {% set roomname = "RH-" ~ i %}
+
+                        {{ get_users(roomname) }}
 
                     </div>
 

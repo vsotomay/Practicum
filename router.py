@@ -3,18 +3,24 @@ import csv
 import pymongo
 from bson.objectid import ObjectId
 
+import socket
+import fcntl
+import struct
+
 app = Flask(__name__)
 
 
-conn = pymongo.MongoClient("mongodb://admin:Utep123@129.108.18.142/test")
+conn = pymongo.MongoClient("mongodb://admin:Utep123@129.108.18.143/test")
 db = conn.test
 db.authenticate("admin", "Utep123")
+
 
 for item in db.rooms.find():
     print (item)
 
 for item in db.workshops.find():
     print (item)
+
 
 def get_users(roomname):
     teamlist = ""
@@ -25,7 +31,7 @@ def get_users(roomname):
             else:
                 for val in item[elem]:
                     for k in val:
-                        teamlist = teamlist + ' ' + (val[k])
+                        teamlist = teamlist + ' -- ' + (val[k])
     return teamlist
 
 
@@ -41,16 +47,36 @@ def get_wsu_num(name):
                         count = val[k]
     return count
 
+def get_roomkey(roomname):
+    roomkey = ""
+    for item in db.rooms.find({"name": roomname}, {"_id": 0, "room_key": 1}):
+        for elem in item:
+            if not isinstance(item[elem], list):
+                roomkey = item[elem]
+            else:
+                for val in item[elem]:
+                    for k in val:
+                        roomkey = val[k]
+    return roomkey
+
+def user_exists(username):
+    if db.rooms.find({'users.username': username}).count() > 0:
+        return 1
+    else:
+        return 0
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
     rh_num = get_wsu_num("Hijacking")
 
-    return render_template("index.html", teamlist = "", rh_num = int(rh_num))
+    return render_template("index.html", rh_num = int(rh_num), get_users=get_users)
 
 
 @app.route('/room', methods=['GET', 'POST'])
 def room():
+
+    rh_num = get_wsu_num("Hijacking")
 
     if request.method == 'POST':
 
@@ -59,17 +85,24 @@ def room():
         roomkey = request.form["roomkey"]
         username = request.form["username"]
         ip_addr = request.environ["REMOTE_ADDR"]
+        port = request.environ.get('REMOTE_PORT')
         wsu = request.form["wsu"]
 
-        db.rooms.insert({"_id": id, "name": roomname, "room_key": roomkey, "users": [{"username": username, "user_ip": ip_addr}], "workshop_unit": wsu})
+        db.rooms.insert(
+            {"_id": id, "name": roomname, "room_key": roomkey, "users":
+            [{"username": username, "user_ip": ip_addr, "user_port": port}],
+            "workshop_unit": wsu}
+        )
 
-        return render_template('index.html', teamlist = "")
+        return render_template('index.html', rh_num = int(rh_num), get_users=get_users)
 
-    return render_template('index.html')
+    return render_template('index.html', rh_num = int(rh_num), get_users=get_users)
 
 
 @app.route('/team', methods=['GET', 'POST'])
 def team():
+
+    rh_num = get_wsu_num("Hijacking")
 
     if request.method == 'POST':
 
@@ -77,14 +110,28 @@ def team():
         roomkey = request.form["roomkey"]
         username = request.form["username"]
         ip_addr = request.environ["REMOTE_ADDR"]
-        #ip_addr = "172.19.203.236"
+        port = request.environ.get('REMOTE_PORT')
 
-        db.rooms.update(
-           { "name" : roomname },
-           { "$push" : { "users": {"username": username, "user_ip": ip_addr}} }
-        )
+        lead_roomkey = get_roomkey(roomname)
 
-        return render_template('index.html', teamlist = "")
+        if lead_roomkey == roomkey:
+
+            exists = user_exists(username)
+
+            if exists == 0:
+                db.rooms.update(
+                    { "name" : roomname },
+                    { "$push" : { "users": {"username": username, "user_ip": ip_addr, "user_port": port}} }
+                )
+            else:
+                db.rooms.update(
+                    { "users.username": username },
+                    { "$set": { "users.$.user_ip": "1.1.0.0", "users.$.user_port": port } }
+                )
+
+            return render_template('index.html', rh_num = int(rh_num), get_users=get_users)
+        else:
+            return render_template('index.html', rh_num = int(rh_num), get_users=get_users, message="ROOM KEY INCORRECT")
 
     return render_template('index.html')
 
@@ -96,4 +143,4 @@ def admin():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host= '0.0.0.0')
