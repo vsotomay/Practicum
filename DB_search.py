@@ -45,9 +45,7 @@ def search_WS_ID(workshop_name):
 # This function returns the document inside the "workshop_name" collection by ObjectID
 def search_WS_by_ID(WS_id):
     try:
-
         doc = WS_collection.find_one({"_id": ObjectId(WS_id)})
-
         return doc
     except Exception, e:
         print str(e)
@@ -156,6 +154,7 @@ def search_user_IP(username):
         user_IP
     except Exception, e:
         print str(e)
+
 # This function searches the entire "test" Database for a document with the specified ObjectID and returns it
 def search_DB_by_ID(document_ID):
     try:
@@ -174,6 +173,17 @@ def search_DB_by_ID(document_ID):
     except Exception, e:
         print str(e)
 
+def get_WSU_collection():
+    try:
+        return WSU_collection
+    except:
+        print str(e)
+
+def get_WS_collection():
+    try:
+        return WS_collection
+    except:
+        print str(e)
 
 client = MongoClient("mongodb://admin:Utep123@129.108.18.143/test")
 
@@ -185,12 +195,10 @@ WS_collection = db.workshops
 WSU_collection = db.workshop_units
 rooms_collection = db.rooms
 
-print_WS()
+# print_WS()
 # print_WSU()
 # print_rooms()
 # print(search_user("Marco"))
 # print(search_WSU("wsu2"))
 # print(search_WS_ID("Hijacking"))
 # print(search_DB_by_ID(search_room_ID("Test Room 1")))
-
-print client.test.getUsers()
