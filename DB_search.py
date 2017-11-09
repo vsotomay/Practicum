@@ -3,6 +3,7 @@ from pymongo import MongoClient
 from pprint import pprint
 from bson.objectid import ObjectId
 
+import pymongo
 import json
 import ast
 import bson
@@ -14,10 +15,11 @@ def print_WS():
     try:
         entries = WS_collection.find()
         for document in entries:
-            print document
+            print (document)
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document inside the "workshops" collection by name
 def search_WS(workshop_name):
@@ -25,8 +27,9 @@ def search_WS(workshop_name):
         doc = WS_collection.find_one({"name": workshop_name})
         return doc
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document's ID inside the "workshops" collection by name
 def search_WS_ID(workshop_name):
@@ -39,26 +42,29 @@ def search_WS_ID(workshop_name):
 
         return query_dictionary['_id']
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document inside the "workshop_name" collection by ObjectID
 def search_WS_by_ID(WS_id):
     try:
         doc = WS_collection.find_one({"_id": ObjectId(WS_id)})
         return doc
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function prints all the documents in the "workshops_units" collection
 def print_WSU():
     try:
         entries = WSU_collection.find()
         for document in entries:
-            print document
+            print (document)
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document inside the "workshops_units" collection by name
 def search_WSU(workshop_unit_name):
@@ -67,8 +73,9 @@ def search_WSU(workshop_unit_name):
         # print doc
         return doc
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document's ID inside the "workshop_units" collection by name
 def search_WSU_ID(workshop_unit_name):
@@ -81,8 +88,9 @@ def search_WSU_ID(workshop_unit_name):
 
         return query_dictionary['_id']
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document inside the "workshop_unit_name" collection by ObjectID
 def search_WSU_by_ID(WSU_id):
@@ -90,18 +98,20 @@ def search_WSU_by_ID(WSU_id):
         doc = WSU_collection.find_one({"_id": ObjectId(WSU_id)})
 
         return doc
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function prints all the documents in the "rooms" collection
 def print_rooms():
     try:
         entries = rooms_collection.find()
         for document in entries:
-            print document
+            print (document)
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document inside the "rooms" collection by name
 def search_room(room_name):
@@ -110,8 +120,9 @@ def search_room(room_name):
         # print doc
         return doc
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document inside the "rooms" collection by ObjectID
 def search_room_ID(room_name):
@@ -119,8 +130,9 @@ def search_room_ID(room_name):
         doc = rooms_collection.find_one({"name": room_name}, {"name": 1})
 
         return doc['_id']
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function returns the document inside the "workshop_unit_name" collection by ObjectID
 def search_room_by_ID(WSU_id):
@@ -128,8 +140,9 @@ def search_room_by_ID(WSU_id):
         doc = rooms_collection.find_one({"_id": ObjectId(WSU_id)})
 
         return doc
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function searches users based on username and returns that document
 def search_user(username):
@@ -137,23 +150,26 @@ def search_user(username):
         user_doc = rooms_collection.find_one({'users.username': username})
         return user_doc
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function searches for a user with the specified IP and returns that document
 def search_user_by_IP(user_IP):
     try:
         user_doc = rooms_collection.find_one({'users.userip': user_IP})
         return user_doc
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function searches for the specified user's IP
 def search_user_IP(username):
     try:
         user_IP
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 # This function searches the entire "test" Database for a document with the specified ObjectID and returns it
 def search_DB_by_ID(document_ID):
@@ -170,20 +186,23 @@ def search_DB_by_ID(document_ID):
         if doc is not None:
             return doc
 
-    except Exception, e:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 def get_WSU_collection():
     try:
         return WSU_collection
-    except:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 def get_WS_collection():
     try:
         return WS_collection
-    except:
-        print str(e)
+    except Exception as e:
+        print (e)
+
 
 client = MongoClient("mongodb://admin:Utep123@129.108.18.143/test")
 
