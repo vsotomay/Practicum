@@ -90,97 +90,6 @@
 
             {% endfor %}
 
-
-
-            <!--<div class="row">-->
-                <!--<div class="col-sm-6 room-container">-->
-
-
-                    <!--<div class="room-div">-->
-
-                        <!--<h3 class="text-center">RH-1</h3>-->
-
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-1" data-target="#room-modal">-->
-                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--&nbsp;-->
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-1" data-target="#team-modal">-->
-                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--<br><br>-->
-
-                        <!--{{ teamlist }}-->
-
-                    <!--</div>-->
-
-                <!--</div>-->
-                <!--<div class="col-sm-6 room-container">-->
-
-
-                    <!--<div class="room-div">-->
-
-                        <!--<h3 class="text-center">RH-2</h3>-->
-
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-2" data-target="#room-modal">-->
-                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--&nbsp;-->
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-2" data-target="#team-modal">-->
-                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--<br><br>-->
-
-                        <!--{{ teamlist }}-->
-
-                    <!--</div>-->
-
-                <!--</div>-->
-            <!--</div>-->
-
-            <!--<div class="row">-->
-                <!--<div class="col-sm-6 room-container">-->
-
-
-                    <!--<div class="room-div">-->
-
-                        <!--<h3 class="text-center">RH-3</h3>-->
-
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-3" data-target="#room-modal">-->
-                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--&nbsp;-->
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-3" data-target="#team-modal">-->
-                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--<br><br>-->
-
-                        <!--{{ teamlist }}-->
-
-                    <!--</div>-->
-
-                <!--</div>-->
-                <!--<div class="col-sm-6 room-container">-->
-
-
-                    <!--<div class="room-div">-->
-
-                        <!--<h3 class="text-center">RH-4</h3>-->
-
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-4" data-target="#room-modal">-->
-                            <!--<i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--&nbsp;-->
-                        <!--<a href="#" class="rh" data-toggle="modal" data-name="RH-4" data-target="#team-modal">-->
-                            <!--<i class="fa fa-sign-in" aria-hidden="true"></i>-->
-                        <!--</a>-->
-                        <!--<br><br>-->
-
-                        <!--{{ teamlist }}-->
-
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
-
         </div>
 
     </div>
@@ -205,8 +114,37 @@
         <br><br>
 
         <div id="bo-ws-div" style="display: none; text-align: center;">
-            <h3>Please enter the following IP to your Remote Desktop Application:
-                <br><br><span class="ip-addr">129.108.18.142:5000</span></h3>
+            <!--<h3>Please enter the following IP to your Remote Desktop Application:-->
+                <!--<br><br><span class="ip-addr">129.108.18.142:5000</span></h3>-->
+
+            {%for i in range(0,bo_num)%}
+
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3 room-container">
+
+                    <div class="room-div">
+
+                        <h3 class="text-center">BO-{{i}}</h3>
+
+                        <a href="#" class="bo" data-toggle="modal" data-name="BO-{{i}}" data-wsu="wsu{{i}}" data-target="#room-modal">
+                            <i class="fa fa-plus-circle fa-lg" aria-hidden="true"></i>
+                        </a>
+                        &nbsp;
+                        <a href="#" class="rh" data-toggle="modal" data-name="BO-{{i}}" data-target="#team-modal">
+                            <i class="fa fa-sign-in" aria-hidden="true"></i>
+                        </a>
+                        <br><br>
+
+                        {% set roomname = "BO-" ~ i %}
+
+                        {{ get_users(roomname) }}
+
+                    </div>
+
+                </div>
+            </div>
+
+            {% endfor %}
 
         </div>
 

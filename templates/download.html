@@ -1,0 +1,23 @@
+{% include "navbar.html" %}
+
+
+<div class="container">
+
+    <div class="jumbotron primary-jum">
+
+        <div class="text-center">
+            <h2>Download RDP File: </h2>
+            <br><br>
+
+            <a href="{{ url_for('download', username=username) }}" target="blank">
+                <button type="button" class="center btn btn-primary btn-lg">Download</button>
+            </a>
+
+        </div>
+    </div>
+
+
+</div>
+
+
+{% include "footer.html" %}

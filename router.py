@@ -1,5 +1,5 @@
-from flask import Flask, render_template, request, jsonify
-import csv
+from flask import Flask, render_template, request, jsonify, send_file, make_response
+import os, sys
 import pymongo
 from bson.objectid import ObjectId
 
@@ -65,18 +65,19 @@ def user_exists(username):
     else:
         return 0
 
+
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
 
-    rh_num = get_wsu_num("Hijacking")
+    rh_num = get_wsu_num("Route Hijacking")
+    bo_num = get_wsu_num("Buffer Overflow")
 
-    return render_template("index.html", rh_num = int(rh_num), get_users=get_users)
+    return render_template("index.html", rh_num = int(rh_num), bo_num=int(bo_num), get_users=get_users)
 
 
 @app.route('/room', methods=['GET', 'POST'])
 def room():
-
-    rh_num = get_wsu_num("Hijacking")
 
     if request.method == 'POST':
 
@@ -94,15 +95,21 @@ def room():
             "workshop_unit": wsu}
         )
 
-        return render_template('index.html', rh_num = int(rh_num), get_users=get_users)
+        filename = "static/rdp/rdp-" + username + ".rdp"
+        f = open(filename,'w')
+        f.write("full address:s:129.108.18.142:5000\nloadbalanceinfo:s:" + username)
+        f.close()
 
-    return render_template('index.html', rh_num = int(rh_num), get_users=get_users)
+        return render_template('download.html',username=username)
+
+    return render_template('index.html')
 
 
 @app.route('/team', methods=['GET', 'POST'])
 def team():
 
-    rh_num = get_wsu_num("Hijacking")
+    rh_num = get_wsu_num("Route Hijacking")
+    bo_num = get_wsu_num("Buffer Overflow")
 
     if request.method == 'POST':
 
@@ -129,11 +136,31 @@ def team():
                     { "$set": { "users.$.user_ip": "1.1.0.0", "users.$.user_port": port } }
                 )
 
-            return render_template('index.html', rh_num = int(rh_num), get_users=get_users)
+
+            filename = "static/rdp/rdp-" + username + ".rdp"
+            f = open(filename,'w')
+            f.write("full address:s:129.108.18.142:5000\nloadbalanceinfo:s:" + username)
+            f.close()
+
+            return render_template('download.html',username=username)
+
         else:
-            return render_template('index.html', rh_num = int(rh_num), get_users=get_users, message="ROOM KEY INCORRECT")
+            return render_template('index.html', rh_num = int(rh_num), bo_num=int(bo_num), get_users=get_users, message="ROOM KEY INCORRECT")
 
     return render_template('index.html')
+
+@app.route('/download')
+def download():
+	try:
+	    username = request.args.get('username')
+	    filename_dir = "static/rdp/rdp-" + username + ".rdp"
+	    filename = "rdp-" + username + ".rdp"
+
+	    os.system("sh /Users/plusvictoria/Repositories/Practicum/test.sh")
+
+	    return send_file(filename_dir, attachment_filename=filename, as_attachment=True)
+	except Exception as e:
+		return str(e)
 
 
 @app.route('/admin')
@@ -144,3 +171,4 @@ def admin():
 
 if __name__ == "__main__":
     app.run(host= '0.0.0.0')
+    #app.run()
